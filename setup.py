@@ -9,7 +9,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="QBMP",
-    version="0.0.2",
+    version="0.0.3",
     description="Declarative synthetic dataset generation through mathematical modelling",
     packages=["QBMP"],
     package_dir={"": "SRCS"},
