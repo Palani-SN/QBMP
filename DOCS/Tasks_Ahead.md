@@ -15,6 +15,14 @@ roadmap. Where a task is already done, the evidence is named so the claim can be
 | `Open` | Not started. Free to pick up |
 | `Decision` | Not blocked on effort, blocked on a maintainer choosing. Say which way and it becomes `Open` |
 
+<!-- The ID header is padded with &nbsp; on purpose. GFM tables size columns to
+     their content, so without it the ID column collapses and a browser wraps
+     IDs at the hyphen, rendering "R-105" over two lines. The padding sets a
+     minimum column width. Do not remove it, and do not "fix" this by putting a
+     non-breaking hyphen in the IDs themselves: that would stop them matching a
+     plain grep for R-105, and copying one from the rendered page would paste a
+     character that does not match the source. -->
+
 Task IDs are stable. Quote one in an issue or PR title (`R-26: unit tests for _plan`) so the board
 and the code stay tied together.
 
@@ -29,7 +37,7 @@ fails late, deep inside a sweep, with an error that does not name the declaratio
 This is the highest-value cluster in the backlog: a bad model should be rejected at construction,
 with a message naming the key at fault.
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | R-01 | Validate that every input named in an output's `weights` exists in `Inputs`. Today a typo raises `KeyError` mid-sweep | Open |
 | R-02 | Validate that each engine's signature accepts exactly the inputs its `weights` names. Today a mismatch raises `TypeError` on the first row | Open |
@@ -48,7 +56,7 @@ least one continuational output is selected; `format` is csv or xlsx; `dataset` 
 
 ## 1.2 Correctness: known defects and rough edges
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | R-11 | Rows outside a declared output range are written to the dataset but counted nowhere on the datasheet: `_cavities`, `_provenance` and `_panel_range` all filter `lo <= value <= hi`, and `_ladder` cuts on declared edges so pandas drops them as `NaN`. Decide whether to warn, clamp or widen | Open |
 | R-12 | `covered%` is `100 * (high - low) / (hi - lo)` over achieved extremes, so it reads above 100 when the model overshoots its declared range instead of flagging it | Open |
@@ -66,7 +74,7 @@ least one continuational output is selected; `format` is csv or xlsx; `dataset` 
 There is no test suite. `pytest` is already declared in `extras_require["dev"]`, and `.gitignore`
 reserves `TESTS/res_files/*`, so the intended location is `TESTS/`.
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | R-21 | `pytest` declared as a dev dependency | Done |
 | R-22 | Create `TESTS/` and settle the import path story: `SRCS` on `PYTHONPATH`, or an editable install | Open |
@@ -78,7 +86,7 @@ reserves `TESTS/res_files/*`, so the intended location is `TESTS/`.
 
 One row per function or tight cluster, so they can be claimed independently.
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | R-26 | `_plan`: the product reaches `min_rows`, counts stay balanced, every pass gets at least 2, and the final overshoot step picks the smallest | Open |
 | R-27 | `_grid`: continuational spacing including the `count == 1` midpoint case; combinational returns the option list regardless of `count` | Open |
@@ -98,7 +106,7 @@ One row per function or tight cluster, so they can be claimed independently.
 
 ## 1.5 Integration, invariant and regression tests
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | R-41 | The coherence invariant as a property test: for any generated frame, re-deriving every output from its own row reproduces it exactly | Open |
 | R-42 | Determinism: the same model, seed and arguments produce a byte-identical CSV across two runs and two processes | Open |
@@ -116,7 +124,7 @@ One row per function or tight cluster, so they can be claimed independently.
 
 ## 1.6 Coverage
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | R-54 | Add `coverage.py`, wire it to the pytest run, and record the starting number | Open |
 | R-55 | Agree a minimum threshold and fail CI below it | Decision |
@@ -125,7 +133,7 @@ One row per function or tight cluster, so they can be claimed independently.
 
 ## 1.7 Static analysis, typing and style
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | R-58 | Choose and configure a linter. `ruff` is the recommendation: it subsumes flake8, isort and more | Decision |
 | R-59 | Fix the first clean pass, including the unreachable branch in R-17 | Open |
@@ -140,7 +148,7 @@ One row per function or tight cluster, so they can be claimed independently.
 
 Nothing is automated today. There is no `.github/` directory.
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | R-66 | `.github/workflows/test.yml`: run the suite on push and pull request | Open |
 | R-67 | Matrix the test job across Python 3.11, 3.12, 3.13 and 3.14, the versions `setup.py` advertises but nothing verifies | Open |
@@ -157,7 +165,7 @@ Nothing is automated today. There is no `.github/` directory.
 
 ## 1.9 Packaging hardening
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | R-78 | `LICENSE.txt` present and carried into metadata as `License-File` | Done |
 | R-79 | Licence declared as an SPDX expression on `license=`, with no deprecated `License ::` classifier | Done |
@@ -173,7 +181,7 @@ Nothing is automated today. There is no `.github/` directory.
 
 ## 1.10 Project governance
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | R-89 | `CONTRIBUTING.md`: how to set up, how to run the tests, and what is expected of a pull request | Open |
 | R-90 | `CHANGELOG.md`, retroactively covering 0.0.1 through 0.0.3 | Open |
@@ -189,7 +197,7 @@ Nothing is automated today. There is no `.github/` directory.
 Measured baseline: the seven-output Demo model at `min_rows=1000, max_bins=2048` produces 4,864
 rows in roughly 20 seconds, and its `index.html` is about 2.4 MB.
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | R-97 | Profile a full `save()` and publish where the time actually goes, before optimising anything | Open |
 | R-98 | Count engine invocations per row. `_solve` probes `PROBE` (400) points per tier, and `_refine` adds six rounds of nine on top of each | Open |
@@ -206,7 +214,7 @@ The claim worth defending is narrow and testable: for a declared output range, Q
 empty bins at a stated resolution** using fewer rows than sampling methods that never look at
 where the gaps are. The list below is the baseline set to measure against.
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | R-105 | Fix the metrics before running anything: `solid@bins`, rows needed to reach zero gaps at a target resolution, `covered%`, `spread`, wall time, engine-call count | Open |
 | R-106 | Baseline: uniform random sampling of the input space | Open |
@@ -239,7 +247,7 @@ pieces.
 The `P` in QBMP, and the only letter with nothing behind it yet. Coverage is solved; flatness is
 not.
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | I-01 | Purge: drop rows from over-full bins. The easy half, a sort and a slice | Open |
 | I-02 | Populate thin bins by rejection sampling. Cheapest, and the first to try | Open |
@@ -252,19 +260,19 @@ not.
 
 ### Pairwise covering for categoricals
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | I-09 | Replace the full cartesian product in `_combos` with a pairwise covering array, guaranteeing every option and every pair while growing logarithmically rather than multiplicatively. `_combos` is the single place it slots in | Open |
 
 ### Multi-output rebalancing
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | I-10 | Minimise the worst `spread` across the selected outputs rather than perfecting any single one | Open |
 
 ### Multi-level dependencies
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | I-11 | Let a `weights` key name another output, turning the bipartite graph into a DAG | Open |
 | I-12 | Settle shared inputs across sibling branches first: if two outputs share an input, the branches are coupled and cannot be solved independently. This decides whether the whole feature is easy or hard | Open |
@@ -274,7 +282,7 @@ not.
 
 ## 2.2 Modelling features
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | I-16 | Integer and discrete inputs. `bedrooms` currently takes values like `1.34`, which is physically nonsense. Blocks I-08 and affects every sampler | Open |
 | I-17 | Stepped inputs: a range plus an increment | Open |
@@ -291,7 +299,7 @@ not.
 
 ## 2.3 API and architecture
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | I-28 | Separate the generation engine from the export layer, so the core can run without pandas or openpyxl in embedded environments. `_build` currently constructs a DataFrame directly | Open |
 | I-29 | A public generate-only entry point. `_generate` already returns a frame without writing, but it is private | Open |
@@ -306,7 +314,7 @@ not.
 
 ## 2.4 Output formats
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | I-38 | Parquet output | Open |
 | I-39 | JSON and JSONL output | Open |
@@ -317,7 +325,7 @@ not.
 
 ## 2.5 The datasheet
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | I-44 | Emit the report as machine-readable JSON alongside the HTML, so CI can assert on coverage | Open |
 | I-45 | Produce a datasheet for an existing dataset without regenerating it | Open |
@@ -329,7 +337,7 @@ not.
 
 ## 2.6 Documentation and adoption
 
-| ID | Task | Status |
+| ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Task | Status |
 |---|---|---|
 | I-51 | A rendered documentation site, mkdocs or Sphinx, rather than two long Markdown files | Open |
 | I-52 | A worked tutorial that builds a model from scratch and explains each metric as it appears | Open |
